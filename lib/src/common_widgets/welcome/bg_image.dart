@@ -1,38 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/colors.dart';
 
 class MyWelcomeImage extends StatelessWidget {
   final String path;
-  const MyWelcomeImage({super.key, required this.path});
+  final String text;
+  const MyWelcomeImage({super.key, required this.path, required this.text});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Transform.scale(
-        scaleX: 1.15,
-        scaleY: 1.15,
-        child: Container(
-          height: MediaQuery.of(context).size.height * 1,
+    return Stack(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(path),
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
             ),
           ),
         ),
-      ),
-      Container(
-        height: MediaQuery.of(context).size.height * 1,
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: AlignmentDirectional(0, 1),
-          colors: [MyColors.black, Colors.transparent],
-        )),
-      ),
-    ]);
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [MyColors.black, Colors.transparent],
+            ),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  style: GoogleFonts.nunitoSans(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: MyColors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20,)
+          ],
+        ),
+      ],
+    );
   }
 }
