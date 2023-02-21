@@ -4,16 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/src/common_widgets/auth/auth_service.dart';
 import 'package:my_app/src/utils/colors.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  final String email;
+  final String password;
+  const Login({super.key, required this.email, required this.password});
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  bool obscure = true;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -24,16 +28,17 @@ class _LoginState extends State<Login> {
         password: _passwordController.text.trim(),
       );
       // ignore: use_build_context_synchronously
-      context.go('/home');
+      context.pushReplacement('/home');
     } on FirebaseAuthException catch (e) {
       Fluttertoast.showToast(
-          msg: e.message.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.grey,
-          textColor: Colors.white,
-          fontSize: 16.0);
+        msg: e.message.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 
@@ -46,8 +51,8 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    bool obscure = true;
-
+    String _email = widget.email;
+    String _password = widget.password;
     return Scaffold(
       backgroundColor: const Color(0xFF0C0C0C),
       body: SafeArea(
@@ -99,6 +104,7 @@ class _LoginState extends State<Login> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
+                            initialValue: _email,
                             controller: _emailController,
                             cursorColor: Colors.white70,
                             decoration: InputDecoration(
@@ -111,7 +117,9 @@ class _LoginState extends State<Login> {
                                   const TextStyle(color: Colors.white70),
                               border: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    width: 0.4, color: Colors.white70),
+                                  width: 0.4,
+                                  color: Colors.white70,
+                                ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -123,6 +131,7 @@ class _LoginState extends State<Login> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            initialValue: _password,
                             controller: _passwordController,
                             obscureText: obscure,
                             obscuringCharacter: '*',
@@ -147,7 +156,9 @@ class _LoginState extends State<Login> {
                               ),
                               suffixIcon: GestureDetector(
                                 onTap: () {
-                                  obscure = !obscure;
+                                  setState(() {
+                                    obscure = !obscure;
+                                  });
                                 },
                                 child: const Icon(
                                   CupertinoIcons.eye_slash,
@@ -221,7 +232,10 @@ class _LoginState extends State<Login> {
                             'assets/images/login_page/google.png',
                             width: 20,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            AuthService.signInWithGoogle();
+                            context.pushReplacement('/home');
+                          },
                           label: Text(
                             'Sign-In With Google',
                             style: GoogleFonts.nunitoSans(

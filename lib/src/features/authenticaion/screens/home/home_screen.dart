@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
     const Notifications(),
   ];
 
-  final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser;
   bool isDrawerOpen = false;
 
   void _onItemTap(int index) {

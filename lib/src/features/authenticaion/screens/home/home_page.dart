@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../common_widgets/home/banner.dart';
@@ -14,8 +13,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-    bool isDrawerOpen = false;
     return GlowingOverscrollIndicator(
       axisDirection: AxisDirection.down,
       color: const Color(0xFFECECEC).withOpacity(1),

@@ -9,7 +9,6 @@ class MyBanner extends StatefulWidget {
 }
 
 class _MyBannerState extends State<MyBanner> {
-  int _index = 1;
 
   @override
   Widget build(BuildContext context) {

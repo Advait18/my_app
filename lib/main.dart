@@ -24,6 +24,7 @@ void main() async {
 
 class App extends StatelessWidget {
   App({Key? key}) : super(key: key);
+  
 
   final GoRouter _router = GoRouter(routes: <GoRoute>[
     GoRoute(
@@ -39,7 +40,7 @@ class App extends StatelessWidget {
         GoRoute(
             path: "login",
             builder: (BuildContext context, GoRouterState state) =>
-                const Login()),
+                const Login(email: ' ', password: ' ')),
         GoRoute(
             path: "signup",
             builder: (BuildContext context, GoRouterState state) =>
@@ -65,6 +66,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final navigatorKey = GlobalKey<NavigatorState>();
     return MaterialApp.router(
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -72,6 +74,7 @@ class App extends StatelessWidget {
       routerDelegate: _router.routerDelegate,
       routeInformationParser: _router.routeInformationParser,
       routeInformationProvider: _router.routeInformationProvider,
+      key: navigatorKey,
     );
   }
 }

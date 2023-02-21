@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/src/features/authenticaion/screens/login/login_screen.dart';
 
+import '../../../../common_widgets/auth/auth_service.dart';
 import '../../../../utils/colors.dart';
 
 class SignUp extends StatefulWidget {
@@ -15,30 +17,84 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool isCreated = false;
+  bool _obscure = true;
+  bool _obscureC = true;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _cpasswordController = TextEditingController();
 
+  bool getCreated() {
+    if (isCreated == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      Fluttertoast.showToast(
-        msg: "Your account has been created!",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-      // ignore: use_build_context_synchronously
-      context.go('/login');
+      if (_passwordController.text.trim() == _cpasswordController.text.trim()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        Fluttertoast.showToast(
+          msg: "Your account has been created!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.grey,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+        isCreated = true;
+        // ignore: use_build_context_synchronously
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/login',
+          (route) => false,
+          arguments: {'email': _emailController.text.trim(), 'password': _passwordController.text.trim()},
+        );
+
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => Login(
+        //       email:  _emailController.text.trim(),
+        //       password: _passwordController.text.trim(),
+        //     ),
+        //   ),
+        // );
+      } else {
+        throw Exception();
+      }
     } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Fluttertoast.showToast(
+          msg: 'The password provided is too weak.',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.grey,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      } else if (e.code == 'email-already-in-use') {
+        Fluttertoast.showToast(
+          msg: 'The account already exists for that email.',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.grey,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+    } on Exception catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        // ignore: avoid_print
+        msg: 'Confirm Password Should Be The Same As Your Password',
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -46,6 +102,8 @@ class _SignUpState extends State<SignUp> {
         textColor: Colors.white,
         fontSize: 16.0,
       );
+      // ignore: avoid_print
+      print(e);
     }
   }
 
@@ -53,12 +111,12 @@ class _SignUpState extends State<SignUp> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _cpasswordController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var obscure = true;
     return Scaffold(
       backgroundColor: const Color(0xFF0C0C0C),
       body: SafeArea(
@@ -78,9 +136,10 @@ class _SignUpState extends State<SignUp> {
                     child: Text(
                       'BASICS',
                       style: GoogleFonts.nunitoSans(
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFFFFFFFF)),
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFFFFFFFF),
+                      ),
                     ),
                   ),
 
@@ -112,6 +171,8 @@ class _SignUpState extends State<SignUp> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
+                            initialValue: '',
+                            autocorrect: false,
                             controller: _emailController,
                             cursorColor: Colors.white70,
                             decoration: InputDecoration(
@@ -124,7 +185,9 @@ class _SignUpState extends State<SignUp> {
                                   const TextStyle(color: Colors.white70),
                               border: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    width: 0.4, color: Colors.white70),
+                                  width: 0.4,
+                                  color: Colors.white70,
+                                ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -136,8 +199,10 @@ class _SignUpState extends State<SignUp> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            initialValue: '',
+                            autocorrect: false,
                             controller: _passwordController,
-                            obscureText: obscure,
+                            obscureText: _obscure,
                             obscuringCharacter: '*',
                             cursorColor: Colors.white70,
                             decoration: InputDecoration(
@@ -160,7 +225,9 @@ class _SignUpState extends State<SignUp> {
                               ),
                               suffixIcon: GestureDetector(
                                 onTap: () {
-                                  obscure = !obscure;
+                                  setState(() {
+                                    _obscure = !_obscure;
+                                  });
                                 },
                                 child: const Icon(
                                   CupertinoIcons.eye_slash,
@@ -171,8 +238,9 @@ class _SignUpState extends State<SignUp> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            autocorrect: false,
                             controller: _cpasswordController,
-                            obscureText: obscure,
+                            obscureText: _obscureC,
                             obscuringCharacter: '*',
                             cursorColor: Colors.white70,
                             decoration: InputDecoration(
@@ -180,7 +248,7 @@ class _SignUpState extends State<SignUp> {
                                 Icons.fingerprint_rounded,
                                 color: Colors.white70,
                               ),
-                              labelText: 'ConfirmPassword',
+                              labelText: 'Confirm Password',
                               labelStyle:
                                   const TextStyle(color: Colors.white70),
                               border: OutlineInputBorder(
@@ -195,7 +263,9 @@ class _SignUpState extends State<SignUp> {
                               ),
                               suffixIcon: GestureDetector(
                                 onTap: () {
-                                  obscure = !obscure;
+                                  setState(() {
+                                    _obscureC = !_obscureC;
+                                  });
                                 },
                                 child: const Icon(
                                   CupertinoIcons.eye_slash,
@@ -210,26 +280,7 @@ class _SignUpState extends State<SignUp> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                try {
-                                  if (_passwordController.value ==
-                                      _cpasswordController.value) {
-                                    signUp;
-                                  } else {
-                                    throw Exception(
-                                      'Confirm Password Should Be The Same As Your Password',
-                                    );
-                                  }
-                                } catch (e) {
-                                  Fluttertoast.showToast(
-                                    msg: e.toString(),
-                                    toastLength: Toast.LENGTH_LONG,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.grey,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0,
-                                  );
-                                }
+                                signUp();
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: MyColors.white,
@@ -277,7 +328,10 @@ class _SignUpState extends State<SignUp> {
                         'assets/images/login_page/google.png',
                         width: 20,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthService.signInWithGoogle();
+                        context.pushReplacement('/home');
+                      },
                       label: Text(
                         'Sign-In With Google',
                         style: GoogleFonts.nunitoSans(
