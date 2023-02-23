@@ -8,9 +8,7 @@ import 'package:my_app/src/common_widgets/auth/auth_service.dart';
 import 'package:my_app/src/utils/colors.dart';
 
 class Login extends StatefulWidget {
-  final String email;
-  final String password;
-  const Login({super.key, required this.email, required this.password});
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -51,8 +49,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    String _email = widget.email;
-    String _password = widget.password;
     return Scaffold(
       backgroundColor: const Color(0xFF0C0C0C),
       body: SafeArea(
@@ -104,7 +100,7 @@ class _LoginState extends State<Login> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
-                            initialValue: _email,
+                            // initialValue: widget.email,
                             controller: _emailController,
                             cursorColor: Colors.white70,
                             decoration: InputDecoration(
@@ -131,7 +127,7 @@ class _LoginState extends State<Login> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
-                            initialValue: _password,
+                            // initialValue: widget.password,
                             controller: _passwordController,
                             obscureText: obscure,
                             obscuringCharacter: '*',

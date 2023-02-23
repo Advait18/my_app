@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/src/common_widgets/home/designer_banners.dart';
 import '../../../../common_widgets/home/banner.dart';
 import '../../../../common_widgets/home/category_bar.dart';
 
@@ -48,56 +49,8 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Container(
-            height: 480,
-            width: MediaQuery.of(context).size.width * 0.92,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              image: DecorationImage(
-                image: AssetImage('assets/images/home_page/img1.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15, 328, 0, 0),
-              child: Text(
-                'Outwear By Pierre Cardin',
-                style: GoogleFonts.ptSerif(
-                  fontSize: 48,
-                  fontWeight: FontWeight.normal,
-                  color: const Color(0xFFFFFFFF),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12),
-          child: Container(
-            height: 480,
-            width: MediaQuery.of(context).size.width * 0.92,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              image: DecorationImage(
-                image: AssetImage('assets/images/home_page/img2.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15, 328, 0, 0),
-              child: Text(
-                'Outwear By Tom Ford',
-                style: GoogleFonts.ptSerif(
-                  fontSize: 48,
-                  fontWeight: FontWeight.normal,
-                  color: const Color(0xFFFFFFFF),
-                ),
-              ),
-            ),
-          ),
-        ),
+        const DesignerBanner(path: 'assets/images/home_page/img1.png', text: 'Outwear By Pierre Cardin'),
+        const DesignerBanner(path: 'assets/images/home_page/img2.png', text: 'Outwear By Tom Ford'),
       ]),
     );
   }

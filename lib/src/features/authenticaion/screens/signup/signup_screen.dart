@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_app/src/features/authenticaion/screens/login/login_screen.dart';
-
 import '../../../../common_widgets/auth/auth_service.dart';
 import '../../../../utils/colors.dart';
 
@@ -17,20 +15,20 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  bool isCreated = false;
+  // bool isCreated = false;
   bool _obscure = true;
   bool _obscureC = true;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _cpasswordController = TextEditingController();
 
-  bool getCreated() {
-    if (isCreated == true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // bool getCreated() {
+  //   if (isCreated == true) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   Future signUp() async {
     try {
@@ -48,14 +46,9 @@ class _SignUpState extends State<SignUp> {
           textColor: Colors.white,
           fontSize: 16.0,
         );
-        isCreated = true;
+        // isCreated = true;
         // ignore: use_build_context_synchronously
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/login',
-          (route) => false,
-          arguments: {'email': _emailController.text.trim(), 'password': _passwordController.text.trim()},
-        );
+        context.pushReplacement('/login');
 
         // Navigator.pushReplacement(
         //   context,
