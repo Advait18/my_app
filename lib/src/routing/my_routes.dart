@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../features/authenticaion/screens/home/home_screen.dart';
 import '../features/authenticaion/screens/login/login_screen.dart';
 import '../features/authenticaion/screens/main_page/main_page.dart';
 import '../features/authenticaion/screens/search/search.dart';
+import '../features/authenticaion/screens/search/search_results.dart';
 import '../features/authenticaion/screens/signup/signup_screen.dart';
 import '../features/authenticaion/screens/splash/splash_screen.dart';
 import '../features/authenticaion/screens/welcome/welcome_screen.dart';
@@ -45,11 +45,11 @@ class MyRoutes {
               path: "main",
               builder: (BuildContext context, GoRouterState state) =>
                   const MainPage()),
-          // GoRoute(
-          // name: 'wishlist',
-          //     path: "wishlist",
-          //     builder: (BuildContext context, GoRouterState state) =>
-          //         const Wishlist()),
+          GoRoute(
+          name: 'searchresults',
+              path: "searchresults",
+              builder: (BuildContext context, GoRouterState state) =>
+                  const SearchResult()),
         ],
         path: '/',
         builder: (BuildContext context, GoRouterState state) =>

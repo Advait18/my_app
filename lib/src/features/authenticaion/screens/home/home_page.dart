@@ -26,9 +26,10 @@ class _HomePageState extends State<HomePage> {
               Text(
                 'CATEGORIES',
                 style: GoogleFonts.nunitoSans(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFFFFFFFF)),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFFFFFFFF),
+                ),
               ),
             ],
           ),
@@ -49,8 +50,12 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        const DesignerBanner(path: 'assets/images/home_page/img1.png', text: 'Outwear By Pierre Cardin'),
-        const DesignerBanner(path: 'assets/images/home_page/img2.png', text: 'Outwear By Tom Ford'),
+        const DesignerBanner(
+            path: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Fhome%2Fimg1.png?alt=media&token=23acfe36-abcf-4c4e-ad63-fd59d4982f5b',
+            text: 'Outwear By Pierre Cardin'),
+        const DesignerBanner(
+            path: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Fhome%2Fimg2.png?alt=media&token=41969b0f-ecae-4bd2-a44e-00925798a408',
+            text: 'Outwear By Tom Ford'),
       ]),
     );
   }

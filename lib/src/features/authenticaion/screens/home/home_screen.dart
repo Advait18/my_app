@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:my_app/src/common_widgets/home/drawer.dart';
+import 'package:my_app/src/features/authenticaion/screens/bag/bag.dart';
+import 'package:my_app/src/features/authenticaion/screens/wishlist/wishlist.dart';
 import '../notificatons/notifications_page.dart';
 import 'home_page.dart';
 
@@ -19,8 +21,8 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const Text('Search'),
-    const Text('Bag'),
+    const Bag(),
+    const Wishlist(),
     const Notifications(),
   ];
 
@@ -33,12 +35,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void toggleDrawer() {
-    setState(() {
-      isDrawerOpen = !isDrawerOpen;
-    });
-    context.go('/login');
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +54,10 @@ class _HomeState extends State<Home> {
         actions: [
           GestureDetector(
             onTap: () {
-              context.go('/search');
+              context.push('/search');
             },
             child: const Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(12),
               child: Icon(CupertinoIcons.search, size: 25),
             ),
           ),
@@ -72,16 +69,16 @@ class _HomeState extends State<Home> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Container(
-        color: const Color(0xFF222222),
+        color: const Color(0xFF131313),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
           child: GNav(
             selectedIndex: _selectedIndex,
             gap: 8,
-            backgroundColor: const Color(0xFF222222),
+            backgroundColor: const Color(0xFF131313),
             color: Colors.white,
             activeColor: Colors.amber,
-            tabBackgroundColor: Colors.grey.shade800,
+            tabBackgroundColor: Colors.grey.shade900,
             padding: const EdgeInsets.all(16),
             onTabChange: _onItemTap,
             tabs: const [

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,7 +21,7 @@ class _MyCategoryState extends State<MyCategory> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: AssetImage(widget.path),
+            image: CachedNetworkImageProvider(widget.path),
             fit: BoxFit.cover,
           ),
         ),

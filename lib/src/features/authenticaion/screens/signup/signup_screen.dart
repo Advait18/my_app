@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import '../../../../utils/colors.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
-
+  static var icon = CupertinoIcons.eye_slash;
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -223,7 +224,7 @@ class _SignUpState extends State<SignUp> {
                                   });
                                 },
                                 child: const Icon(
-                                  CupertinoIcons.eye_slash,
+                                  CupertinoIcons.eye,
                                   color: Colors.white70,
                                 ),
                               ),
@@ -317,12 +318,14 @@ class _SignUpState extends State<SignUp> {
                     height: 60,
                     width: double.infinity,
                     child: OutlinedButton.icon(
-                      icon: Image.asset(
-                        'assets/images/login_page/google.png',
+                      icon: CachedNetworkImage(
+                        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Flogin%2Fgoogle.png?alt=media&token=3b97c1ff-23f2-431f-a9fc-cdd21f2c805e',
                         width: 20,
+                        fadeInDuration: const Duration(milliseconds: 100),
                       ),
-                      onPressed: () {
-                        AuthService.signInWithGoogle();
+                      onPressed: () async {
+                        await AuthService.signInWithGoogle();
+                        // ignore: use_build_context_synchronously
                         context.pushReplacement('/home');
                       },
                       label: Text(

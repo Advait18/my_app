@@ -41,13 +41,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   items: const [
                     MyWelcomeImage(
-                        path: 'assets/images/welcome_page/Image1.png',
+                        path: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Fwelcome%2FImage1.png?alt=media&token=142806c6-8c2d-4dcc-9553-684b4cc0caff',
                         text: 'FOR THE MINIMALISTS'), //0
                     MyWelcomeImage(
-                        path: 'assets/images/welcome_page/Image2.png',
+                        path: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Fwelcome%2FImage2.png?alt=media&token=e6d6704e-2ba2-4da7-9bc0-9a67d32e9924',
                         text: 'HUSTLE IN STYLE'), //1
                     MyWelcomeImage(
-                        path: 'assets/images/welcome_page/Image3.png',
+                        path: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Fwelcome%2FImage3.png?alt=media&token=9e205b49-be41-471b-aa8c-438cbfab8441',
                         text: 'EXCLUSIVE SPORTS WEAR'), //2
                   ],
                 ),

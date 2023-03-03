@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,7 +17,7 @@ class DesignerBanner extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           image: DecorationImage(
-            image: AssetImage(path),
+            image: CachedNetworkImageProvider(path),
             fit: BoxFit.cover,
           ),
         ),
