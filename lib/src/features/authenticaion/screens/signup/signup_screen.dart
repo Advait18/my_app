@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../common_widgets/auth/auth_service.dart';
 import '../../../../utils/colors.dart';
+import '../search/search.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -319,6 +320,7 @@ class _SignUpState extends State<SignUp> {
                     width: double.infinity,
                     child: OutlinedButton.icon(
                       icon: CachedNetworkImage(
+                        cacheManager: Search.customCacheManager,
                         imageUrl: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Flogin%2Fgoogle.png?alt=media&token=3b97c1ff-23f2-431f-a9fc-cdd21f2c805e',
                         width: 20,
                         fadeInDuration: const Duration(milliseconds: 100),

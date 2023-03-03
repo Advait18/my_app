@@ -34,7 +34,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     viewportFraction: 1,
                     enableInfiniteScroll: true,
                     autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 4),
+                    autoPlayInterval: const Duration(seconds: 5),
                     slideIndicator: const CircularSlideIndicator(
                         indicatorRadius: 3, itemSpacing: 10),
                     indicatorMargin: 80,

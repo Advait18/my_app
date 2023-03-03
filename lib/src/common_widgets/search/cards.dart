@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/src/utils/colors.dart';
 
+import '../../features/authenticaion/screens/search/search.dart';
+
 class Cards extends StatelessWidget {
   final String name;
   final String price;
@@ -24,6 +26,7 @@ class Cards extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CachedNetworkImage(
+            cacheManager: Search.customCacheManager,
             imageUrl: image,
             fit: BoxFit.fitWidth,
             width: 190,

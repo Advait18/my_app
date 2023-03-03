@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../features/authenticaion/screens/search/search.dart';
 import '../../utils/colors.dart';
 
 class MyWelcomeImage extends StatelessWidget {
@@ -18,7 +19,10 @@ class MyWelcomeImage extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: CachedNetworkImageProvider(path),
+              image: CachedNetworkImageProvider(
+                path,
+                cacheManager: Search.customCacheManager,
+              ),
               fit: BoxFit.fill,
             ),
           ),
@@ -50,7 +54,9 @@ class MyWelcomeImage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20,)
+            const SizedBox(
+              height: 20,
+            )
           ],
         ),
       ],

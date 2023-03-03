@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../features/authenticaion/screens/search/search.dart';
 import '../../utils/colors.dart';
 
 class FavCard extends StatelessWidget {
@@ -44,6 +45,7 @@ class FavCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: CachedNetworkImage(
+                      cacheManager: Search.customCacheManager,
                       imageUrl: image,
                       fit: BoxFit.cover,
                       width: 125,

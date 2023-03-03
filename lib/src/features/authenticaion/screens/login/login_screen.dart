@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_app/src/common_widgets/auth/auth_service.dart';
 import 'package:my_app/src/utils/colors.dart';
 
+import '../search/search.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -226,6 +228,7 @@ class _LoginState extends State<Login> {
                         width: double.infinity,
                         child: OutlinedButton.icon(
                           icon: CachedNetworkImage(
+                            cacheManager: Search.customCacheManager,
                             imageUrl: 'https://firebasestorage.googleapis.com/v0/b/basics-aac0f.appspot.com/o/images%2Flogin%2Fgoogle.png?alt=media&token=3b97c1ff-23f2-431f-a9fc-cdd21f2c805e',
                             width: 20,
                             fadeInDuration: const Duration(milliseconds: 100),

@@ -40,6 +40,7 @@ class _SearchResultState extends State<SearchResult> {
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
+                    cacheManager: Search.customCacheManager,
                     imageUrl: product.image,
                     fit: BoxFit.fitWidth,
                     width: 40,

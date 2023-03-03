@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../features/authenticaion/screens/search/search.dart';
+
 class MyCategory extends StatefulWidget {
   final String path;
   final String name;
@@ -21,7 +23,10 @@ class _MyCategoryState extends State<MyCategory> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: CachedNetworkImageProvider(widget.path),
+            image: CachedNetworkImageProvider(
+              cacheManager: Search.customCacheManager,
+              widget.path,
+            ),
             fit: BoxFit.cover,
           ),
         ),

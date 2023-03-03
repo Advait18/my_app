@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../features/authenticaion/screens/search/search.dart';
+
 class DesignerBanner extends StatelessWidget {
   final String path;
   final String text;
@@ -17,13 +19,17 @@ class DesignerBanner extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           image: DecorationImage(
-            image: CachedNetworkImageProvider(path),
+            image: CachedNetworkImageProvider(
+              cacheManager: Search.customCacheManager,
+              path,
+            ),
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 328, 0, 0),
-          child: Text(text,
+          child: Text(
+            text,
             style: GoogleFonts.ptSerif(
               fontSize: 48,
               fontWeight: FontWeight.normal,
